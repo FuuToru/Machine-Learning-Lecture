@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Phân loại chữ số tay</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas" width="280" height="280" style="border: 1px solid black; background-color: black;"></canvas>
+
+    <button id="predict-btn">Dự đoán</button>
+
+    <div id="result"></div>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var isDrawing = false;
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(e.offsetX, e.offsetY, 20, 20);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        $('#predict-btn').click(function () {
+            var imageData = canvas.toDataURL('image/png');
+            $.ajax({
+                url: '/predict',
+                method: 'POST',
+                data: imageData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $('#result').text('Chữ số dự đoán: ' + response.predicted_digit);
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

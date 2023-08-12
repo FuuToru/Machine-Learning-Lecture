@@ -1,0 +1,22 @@
+This mat file contains random-face features for AR database. The dimension of each feature is 540.
+There are three variables in this file:
+
+(1) featureMat:
+A matrix of random features. Each column correspond to one random face feature.
+
+(2) filenameMat:
+Image file names. Each cell correspond to the features from the same class in 'featureMat'. 
+
+(3) labelMat:
+This is a label matrix, each column corresponds to one random face feature, where the non-zero position of each column 
+indicates the class of the random face feature.
+
+
+If you happen to use this file, please cite our paper:
+
+Zhuolin Jiang, Zhe Lin, Larry S. Davis. " Learning a Discriminative Dictionary for Sparse Coding via Label Consistent K-SVD". 
+IEEE Conference on Computer Vision and Pattern Recognition, 2011.
+
+
+If you have any questions, please contact: zhuolin@umiacs.umd.edu
+ 
